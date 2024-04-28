@@ -56,27 +56,31 @@ jobs:
         sudo apt-get install gcc g++ libboost-dev cmake zlib1g-dev libsasl2-2
 
         git clone https://github.com/jbeder/yaml-cpp.git
-        cd yaml-cpp
+        pushd yaml-cpp
         mkdir build
-        cd build
+        pushd build
         cmake -DBUILD_SHARED_LIBS=OFF ..
         make
         sudo make install
-        cd ../../
+        popd
+        popd
 
         git clone https://github.com/edenhill/librdkafka.git
-        cd librdkafka
+        pushd librdkafka
         ./configure
         make
         sudo make install
-        cd ../
+        popd
 
         git clone https://github.com/FengPan-Frank/openbmp
-        cd openbmp
+        pushd openbmp
         mkdir build
-        cd build
+        pushd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ../
         make
-        cd ../../
-
+        popd
+        popd
+    - publish: $(System.DefaultWorkingDirectory)/
+      artifact: sonic-bmp.amd64.ubuntu20_04
+      displayName: "Archive sonic-bmp packages"
 
