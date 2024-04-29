@@ -51,7 +51,7 @@ jobs:
     - script: |
         set -ex
         sudo apt-get update
-        sudo apt-get install -y gcc g++ libboost-dev cmake zlib1g-dev libsasl2-2 libsasl2-dev libcurl4-openssl-dev
+        sudo apt-get install -y gcc g++ libboost-dev cmake zlib1g-dev libsasl2-2 libsasl2-dev
 
         git clone https://github.com/jbeder/yaml-cpp.git
         pushd yaml-cpp
@@ -77,8 +77,6 @@ jobs:
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ../
         make
         popd
-        cat Server/CMakeFiles/openbmpd.dir/build.make
-        cat Server/CMakeFiles/Makefile2
         popd
     - publish: $(System.DefaultWorkingDirectory)/
       artifact: sonic-bmp.amd64.ubuntu20_04
