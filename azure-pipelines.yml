@@ -22,13 +22,6 @@ parameters:
   type: string
   default: sonic-slave-bullseye
 
-variables:
-  - name: BUILD_BRANCH
-    ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-      value: $(Build.SourceBranchName)
-    ${{ else }}:
-      value: $(Build.SourceBranchName)
-
 schedules:
 - cron: "0 0 * * *"
   displayName: Daily
@@ -73,6 +66,7 @@ jobs:
 
         dpkg -l|grep curl
         git clone https://github.com/FengPan-Frank/openbmp
+        git checkout $(Build.SourceBranchName)
         pushd openbmp
         mkdir build
         pushd build
