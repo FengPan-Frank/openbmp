@@ -49,7 +49,9 @@ jobs:
   steps:
     - checkout: none
     - script: |
-        sudo apt-get install gcc g++ libboost-dev cmake zlib1g-dev libsasl2-2
+        set -ex
+        sudo apt-get update
+        sudo apt-get install gcc g++ libboost-dev cmake zlib1g-dev libsasl2-2 libsasl2-dev
 
         git clone https://github.com/jbeder/yaml-cpp.git
         pushd yaml-cpp
@@ -79,7 +81,6 @@ jobs:
         cat Server/CMakeFiles/Makefile2
         popd
         sudo dpkg -l | grep libsasl2  
-        sudo apt-get install libsasl2-dev  
         find / -name "libsasl2.so" -o -name "libsasl2.a" 2>/dev/null  
         sudo ldconfig  
     - publish: $(System.DefaultWorkingDirectory)/
