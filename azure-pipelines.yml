@@ -70,6 +70,7 @@ jobs:
         sudo make install
         popd
 
+        dpkg -l|grep curl
         git clone https://github.com/FengPan-Frank/openbmp
         pushd openbmp
         mkdir build
