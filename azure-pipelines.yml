@@ -66,8 +66,8 @@ jobs:
 
         dpkg -l|grep curl
         git clone https://github.com/FengPan-Frank/openbmp
-        git checkout $(Build.SourceBranchName)
         pushd openbmp
+        git checkout $(Build.SourceBranchName)
         mkdir build
         pushd build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ../
