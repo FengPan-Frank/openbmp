@@ -82,6 +82,9 @@ jobs:
         cat Server/CMakeFiles/openbmpd.dir/build.make
         cat Server/CMakeFiles/Makefile2
         popd
+        sudo dpkg -l
+        sudo apt-get install libsasl2-dev  
+
     - publish: $(System.DefaultWorkingDirectory)/
       artifact: sonic-bmp.amd64.ubuntu20_04
       displayName: "Archive sonic-bmp packages"
